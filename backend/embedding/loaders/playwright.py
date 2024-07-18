@@ -55,7 +55,7 @@ class PlaywrightEvaluator(ABC):
 class DelayUnstructuredHtmlEvaluator(PlaywrightEvaluator):
     """UnstructuredHtmlEvaluator with delay."""
 
-    def __init__(self, remove_selectors: list[str] | None = None, delay_sec: int = 0):
+    def __init__(self, remove_selectors: list[str] | None = None, delay_sec: int = 10):
         """Initialize UnstructuredHtmlEvaluator."""
         try:
             import unstructured  # noqa:F401
@@ -134,7 +134,7 @@ class PlaywrightURLLoader(BaseLoader):
                 "`remove_selectors` and `evaluator` cannot be both not None"
             )
         self.evaluator = evaluator or DelayUnstructuredHtmlEvaluator(
-            remove_selectors, delay_sec=2
+            remove_selectors, delay_sec=10
         )
 
     def load(self) -> list[Document]:
